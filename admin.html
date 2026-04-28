@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Senio Gymrat - Admin Panel</title>
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-logo">Senio <span>Gymrat</span> - Admin</div>
+        <button class="admin-logout-btn" id="adminLogout">Logout</button>
+    </header>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class='bx bxs-dashboard'></i> Dashboard
+                </button>
+                <button class="nav-btn" data-section="members">
+                    <i class='bx bxs-group'></i> Members
+                </button>
+                <button class="nav-btn" data-section="payments">
+                    <i class='bx bxs-credit-card'></i> Payments
+                </button>
+                <button class="nav-btn" data-section="reviews">
+                    <i class='bx bxs-star'></i> Reviews
+                </button>
+                <button class="nav-btn" data-section="announcements">
+                    <i class='bx bxs-megaphone'></i> Announcements
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Members</h3>
+                        <p class="stat-number" id="totalMembers">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <p class="stat-number" id="totalRevenue">₱0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Payments</h3>
+                        <p class="stat-number" id="totalPayments">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Reviews</h3>
+                        <p class="stat-number" id="totalReviews">0</p>
+                    </div>
+                </div>
+
+                <div class="chart-section">
+                    <h3>Recent Activity</h3>
+                    <div id="recentActivity" class="activity-list">
+                        <p>No recent activity</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Members Section -->
+            <section id="members" class="admin-section">
+                <h2>Manage Members</h2>
+                <div class="admin-controls">
+                    <input type="text" id="memberSearch" placeholder="Search members..." class="search-input">
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Membership</th>
+                            <th>Join Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <tr><td colspan="4">No members yet</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="admin-section">
+                <h2>Manage Payments</h2>
+                <div class="admin-controls">
+                    <select id="paymentFilter" class="filter-select">
+                        <option value="">All Plans</option>
+                        <option value="BASIC">BASIC</option>
+                        <option value="PRO">PRO</option>
+                        <option value="PREMIUM">PREMIUM</option>
+                    </select>
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody">
+                        <tr><td colspan="6">No payments yet</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Reviews Section -->
+            <section id="reviews" class="admin-section">
+                <h2>User Reviews & Feedback</h2>
+                
+                <div id="reviewsList" class="reviews-list-admin">
+                    <p>No reviews yet</p>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="admin-section">
+                <h2>Send Announcements</h2>
+                <div class="admin-controls">
+                    <div class="announcement-form">
+                        <label for="announcementTitle">Title</label>
+                        <input type="text" id="announcementTitle" placeholder="Enter announcement title" class="search-input">
+
+                        <label for="announcementMsg">Message</label>
+                        <textarea id="announcementMsg" placeholder="Enter your message..." rows="5" class="search-input"></textarea>
+
+                        <label for="sendToUsers">Send To</label>
+                        <div class="select-wrapper">
+                            <select id="sendToUsers" class="filter-select">
+                                <option value="all">All Members</option>
+                                <option value="basic">Basic Members</option>
+                                <option value="pro">Pro Members</option>
+                                <option value="premium">Premium Members</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn" id="sendAnnouncementBtn" onclick="sendAnnouncement()" style="margin-top: 1rem; width: 100%;">Send Announcement</button>
+                        <p id="announcementStatusMsg" style="margin-top: 1rem;"></p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Recent Announcements</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Message</th>
+                            <th>Sent To</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="announcementsTableBody">
+                        <tr><td colspan="5">No announcements sent yet</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAdminModal">&times;</span>
+            <h2>Admin Login</h2>
+            <form id="adminLoginForm">
+                <label for="adminUsername">Username</label>
+                <input type="text" id="adminUsername" required>
+
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" required>
+
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p id="adminLoginError" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Delete</h2>
+            <p id="deleteMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="btn">Delete</button>
+                <button id="cancelDeleteBtn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

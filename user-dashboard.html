@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>User Dashboard - Senio Gymrat</title>
+</head>
+<body>
+    <!-- User Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-logo">
+            <a href="index.html" class="logo">Senio <span>Gymrat</span></a>
+        </div>
+        <h1 class="dashboard-title">User Dashboard</h1>
+        <button class="dashboard-logout-btn" id="dashboardLogout">
+            <i class='bx bx-log-out'></i> Logout
+        </button>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <nav class="dashboard-nav">
+                <button class="dash-nav-btn active" data-section="overview">
+                    <i class='bx bxs-dashboard'></i> Overview
+                </button>
+                <button class="dash-nav-btn" data-section="profile">
+                    <i class='bx bxs-user'></i> Profile
+                </button>
+                <button class="dash-nav-btn" data-section="membership">
+                    <i class='bx bxs-credit-card'></i> Membership
+                </button>
+                <button class="dash-nav-btn" data-section="progress">
+                    <i class='bx bxs-chart'></i> Progress
+                </button>
+                <button class="dash-nav-btn" data-section="payments">
+                    <i class='bx bxs-wallet'></i> Payments
+                </button>
+                <button class="dash-nav-btn" data-section="messages">
+                    <i class='bx bxs-message-dots'></i> Messages
+                </button>
+                <button class="dash-nav-btn" data-section="reviews">
+                    <i class='bx bxs-star'></i> Reviews
+                </button>
+                <button class="dash-nav-btn" data-section="settings">
+                    <i class='bx bxs-cog'></i> Settings
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <h2>Welcome Back, <span id="overviewUsername">User</span>! 💪</h2>
+                
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class='bx bxs-badge-check'></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Current Plan</h3>
+                            <p class="card-value" id="overviewPlan">No Active Plan</p>
+                            <small>Upgrade anytime</small>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class='bx bxs-calendar'></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Days Active</h3>
+                            <p class="card-value" id="overviewDaysActive">0</p>
+                            <small>Keep the streak going!</small>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class='bx bxs-zap'></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Workouts</h3>
+                            <p class="card-value" id="overviewWorkouts">0</p>
+                            <small>Stay consistent</small>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class='bx bxs-target-lock'></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Progress</h3>
+                            <p class="card-value" id="overviewProgress">0%</p>
+                            <small>Towards your goal</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="goToSection('membership')">
+                            <i class='bx bxs-upgrade'></i> Upgrade Plan
+                        </button>
+                        <button class="action-btn" onclick="goToSection('progress')">
+                            <i class='bx bxs-chart-alt'></i> View Stats
+                        </button>
+                        <button class="action-btn" onclick="goToSection('payments')">
+                            <i class='bx bxs-wallet-alt'></i> Payment History
+                        </button>
+                        <button class="action-btn" onclick="goToSection('settings')">
+                            <i class='bx bxs-cog'></i> Settings
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="dashboard-section">
+                <h2>My Profile</h2>
+                
+                <div class="profile-container">
+                    <div class="profile-card-large">
+                        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-avatar" id="profileAvatar">
+                        <h3 id="profileFullName">User Name</h3>
+                        <p class="profile-member-id" id="profileMemberId">Member ID: N/A</p>
+                        
+                        <div class="profile-info">
+                            <div class="info-item">
+                                <label>Username</label>
+                                <p id="profileUsername">username</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Email</label>
+                                <p id="profileEmail">email@example.com</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Phone</label>
+                                <p id="profilePhone">+63 9XX XXX XXXX</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Join Date</label>
+                                <p id="profileJoinDate">N/A</p>
+                            </div>
+                        </div>
+
+                        <button class="btn" onclick="editProfile()">
+                            <i class='bx bxs-pencil'></i> Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Membership Section -->
+            <section id="membership" class="dashboard-section">
+                <h2>My Membership</h2>
+                
+                <div class="membership-info">
+                    <div class="current-membership">
+                        <h3>Current Membership Status</h3>
+                        <div class="membership-status" id="membershipStatus">
+                            <p style="color: #ccc;">No Active Membership</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 3rem;">Available Plans</h3>
+                    <div class="membership-plans">
+                        <div class="membership-card">
+                            <h4>BASIC</h4>
+                            <p class="price">₱<span>550</span>/Month</p>
+                            <ul class="features-list">
+                                <li><i class='bx bx-check'></i> Access to gym during business hours</li>
+                                <li><i class='bx bx-check'></i> Basic workout area access</li>
+                                <li><i class='bx bx-check'></i> Equipment usage</li>
+                                <li><i class='bx bx-check'></i> Locker access</li>
+                            </ul>
+                            <button class="btn" onclick="selectPlan('BASIC', 550)">Choose Plan</button>
+                        </div>
+
+                        <div class="membership-card featured">
+                            <span class="badge">POPULAR</span>
+                            <h4>PRO</h4>
+                            <p class="price">₱<span>1500</span>/3 Months</p>
+                            <ul class="features-list">
+                                <li><i class='bx bx-check'></i> Access to advanced strength & cardio zones</li>
+                                <li><i class='bx bx-check'></i> Detailed progress tracking in-app</li>
+                                <li><i class='bx bx-check'></i> Full library of premium video guides</li>
+                                <li><i class='bx bx-check'></i> Priority equipment access</li>
+                            </ul>
+                            <button class="btn" onclick="selectPlan('PRO', 1500)">Choose Plan</button>
+                        </div>
+
+                        <div class="membership-card">
+                            <h4>PREMIUM</h4>
+                            <p class="price">₱<span>3000</span>/6 Months</p>
+                            <ul class="features-list">
+                                <li><i class='bx bx-check'></i> Access to exclusive recovery areas</li>
+                                <li><i class='bx bx-check'></i> Dedicated monthly sessions with a coach</li>
+                                <li><i class='bx bx-check'></i> Custom macros and diet plans</li>
+                                <li><i class='bx bx-check'></i> Premium convenience for every visit</li>
+                            </ul>
+                            <button class="btn" onclick="selectPlan('PREMIUM', 3000)">Choose Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="dashboard-section">
+                <h2>My Progress</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-card">
+                        <h3>Fitness Goals</h3>
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <span>Weight Loss</span>
+                                <span class="goal-progress" id="goal1">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="goal1-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <span>Muscle Gain</span>
+                                <span class="goal-progress" id="goal2">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="goal2-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <span>Workout Consistency</span>
+                                <span class="goal-progress" id="goal3">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="goal3-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>This Month Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <p class="stat-label">Workouts</p>
+                                <p class="stat-value" id="monthWorkouts">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Hours</p>
+                                <p class="stat-value" id="monthHours">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Calories</p>
+                                <p class="stat-value" id="monthCalories">0</p>
+                            </div>
+                            <div class="stat">
+                                <p class="stat-label">Best Day</p>
+                                <p class="stat-value" id="monthBestDay">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="dashboard-section">
+                <h2>📨 Messages</h2>
+                
+                <div class="messages-container">
+                    <div id="messagesList" class="messages-list">
+                        <p class="no-messages">No messages yet</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reviews Section -->
+            <section id="reviews" class="dashboard-section">
+                <h2>My Reviews</h2>
+                
+                <div class="reviews-container">
+                    <div class="review-form-section">
+                        <h3>Submit Your Review</h3>
+                        <div class="review-form">
+                            <label for="userReviewRating">Rating</label>
+                            <div class="select-wrapper">
+                                <select id="userReviewRating" class="filter-select">
+                                    <option value="">-- Select Rating --</option>
+                                    <option value="1">⭐ 1 Star</option>
+                                    <option value="2">⭐⭐ 2 Stars</option>
+                                    <option value="3">⭐⭐⭐ 3 Stars</option>
+                                    <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                                    <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                                </select>
+                            </div>
+
+                            <label for="userReviewText">Your Review</label>
+                            <textarea id="userReviewText" placeholder="Share your experience with Senio Gymrat..." rows="4" class="search-input"></textarea>
+
+                            <button type="button" class="btn" onclick="submitUserReview()" style="margin-top: 1rem; width: 100%;">Submit Review</button>
+                            <p id="reviewSubmitMessage" style="margin-top: 1rem;"></p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 3rem;">Your Reviews</h3>
+                    <div id="userReviewsList" class="reviews-list">
+                        <p>No reviews submitted yet</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="dashboard-section">
+                <h2>Payment History</h2>
+                
+                <div class="payments-container">
+                    <table class="payments-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                            <tr><td colspan="5" style="text-align: center; padding: 2rem;">No payment history yet</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="dashboard-section">
+                <h2>Settings</h2>
+                
+                <div class="settings-container">
+                    <div class="settings-group">
+                        <h3>Account Settings</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Change Password</label>
+                                <small>Update your password regularly for security</small>
+                            </div>
+                            <button class="btn-secondary" onclick="changePassword()">Change</button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Email Notifications</label>
+                                <small>Receive updates about your membership</small>
+                            </div>
+                            <input type="checkbox" class="toggle" checked>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>SMS Alerts</label>
+                                <small>Get workout reminders via SMS</small>
+                            </div>
+                            <input type="checkbox" class="toggle">
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Preferences</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Dark Mode</label>
+                                <small>Currently enabled</small>
+                            </div>
+                            <input type="checkbox" class="toggle" checked>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label>Show Activity Feed</label>
+                                <small>Display your workout activity</small>
+                            </div>
+                            <input type="checkbox" class="toggle" checked>
+                        </div>
+                    </div>
+
+                    <div class="settings-group danger">
+                        <h3>Danger Zone</h3>
+                        <button class="btn-danger" onclick="deleteAccount()">Delete Account</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content" style="width: 90%; max-width: 500px;">
+            <span class="close" id="closeEditProfileModal">&times;</span>
+            <h2>Edit Profile</h2>
+
+            <form id="editProfileForm">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <img src="https://via.placeholder.com/120" alt="Profile" id="editProfileAvatarPreview" class="profile-avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem;">
+                    <div>
+                        <label for="profileImageInput" class="btn" style="cursor: pointer; display: inline-block;">
+                            <i class='bx bxs-camera'></i> Upload Photo
+                        </label>
+                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <label for="editFullName">Full Name</label>
+                <input type="text" id="editFullName" class="search-input" required>
+
+                <label for="editEmail">Email</label>
+                <input type="email" id="editEmail" class="search-input" required>
+
+                <label for="editPhone">Phone</label>
+                <input type="text" id="editPhone" class="search-input" required>
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Save Changes</button>
+                <p id="editProfileMessage" style="margin-top: 1rem; text-align: center;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePaymentModal">&times;</span>
+            <h2>Select Payment Method</h2>
+
+            <form id="dashboardPaymentForm">
+                <input type="hidden" id="selectedPlan">
+                <input type="hidden" id="selectedAmount">
+
+                <label>Plan:</label>
+                <p id="paymentPlanName" style="color: #45ffca; margin-bottom: 1rem;"></p>
+
+                <label for="paymentMethod">Payment Method</label>
+                <div class="select-wrapper">
+                    <select id="paymentMethod" required>
+                        <option value="">-- Select Method --</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="credit">Credit Card</option>
+                        <option value="gcash">GCash</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Proceed to Pay</button>
+                <p id="dashboardPaymentMessage" style="margin-top: 1rem;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="user-dashboard.js"></script>
+</body>
+</html>
